@@ -21,7 +21,15 @@ public class ShowMovieEntity {
     @Column(name = "startTime")
     private LocalTime startTime;
 
+    @Column(name = "state_show")
+    private String stateShow;
+
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private MovieEntity movie;
+
+    @ManyToOne
+    @JoinColumn(name = "cinema_id")
+    private CinemaEntity cinema;
+
 }
