@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
+                .antMatchers("/file/**").permitAll()
                 .antMatchers("/login/**").permitAll()
                 .antMatchers("/category/**").permitAll()
                 .antMatchers("/product/file/**").permitAll()
