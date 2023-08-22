@@ -48,6 +48,8 @@ public class SecurityConfig {
                 .antMatchers("/product/file/**").permitAll()
                 .antMatchers("/product/category/**").permitAll()
                 .antMatchers("/product/**").permitAll()
+                .antMatchers("/signup/**").permitAll()
+
                 //Tất cả các link còn lại điều phải chứng thực
                 .anyRequest().authenticated()
                 .and()
