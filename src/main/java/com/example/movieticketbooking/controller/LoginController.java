@@ -38,13 +38,5 @@ public class LoginController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-////    Viết API /signup cho tính năng đăng ký sử dụng RequestBody
-//    @PostMapping("/signup")
-//    public ResponseEntity<?> signup(@RequestBody SignUpRequest signUpRequest){
-//        boolean isSuccess = loginService.insertUser(signUpRequest);
-//        BaseResponse response = new BaseResponse();
-//        response.setMessage(isSuccess ? "Đăng ký thành công" : "Đăng ký thất bại");
-//        response.setData(isSuccess);
-//        return new ResponseEntity<>(response,HttpStatus.OK);
-//    }
+
 }
