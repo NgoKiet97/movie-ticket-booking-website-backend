@@ -23,7 +23,7 @@ public class MovieEntity {
     private String imageThumbnail;
 
     @Column(name = "image_poster")
-    private String image_poster;
+    private String imagePoster;
 
     @Column(name = "description")
     private String description;
@@ -40,7 +40,7 @@ public class MovieEntity {
     @Column(name = "trailer")
     private String trailer;
 
-    @Column(name = "releaseDate")
+    @Column(name = "release_date")
     private Date releaseDate;
 
     @ManyToOne
