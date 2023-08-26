@@ -18,7 +18,7 @@ public class ShowMovieEntity {
     @Column(name = "date")
     private Date date;
 
-    @Column(name = "startTime")
+    @Column(name = "start_time")
     private LocalTime startTime;
 
     @Column(name = "state_show")
