@@ -23,6 +23,5 @@ public class CinemaEntity {
     @OneToMany(mappedBy = "cinema")
     private Set<RoomEntity> rooms;
 
-    @OneToMany(mappedBy = "cinema")
-    private Set<ShowMovieEntity> showMovies;
+
 }

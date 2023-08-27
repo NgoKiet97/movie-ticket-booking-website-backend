@@ -23,4 +23,7 @@ public class RoomEntity {
 
     @OneToMany(mappedBy = "room")
     private Set<SeatEntity> seats;
+
+    @OneToMany(mappedBy = "roomEntity")
+    private Set<ShowMovieEntity> showMovies;
 }

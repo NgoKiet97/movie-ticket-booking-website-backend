@@ -29,7 +29,7 @@ public class ShowMovieEntity {
     private MovieEntity movie;
 
     @ManyToOne
-    @JoinColumn(name = "cinema_id")
-    private CinemaEntity cinema;
+    @JoinColumn(name = "room_id")
+    private RoomEntity roomEntity;
 
 }
