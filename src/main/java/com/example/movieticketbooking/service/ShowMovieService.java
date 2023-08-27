@@ -27,13 +27,14 @@ public class ShowMovieService implements IShowMovieService {
             ShowMovieResponse showMovieResponse = new ShowMovieResponse();
             showMovieResponse.setId(entity.getId());
             showMovieResponse.setMovie(entity.getMovie().getName());
-            showMovieResponse.setCinema(entity.getCinema().getName());
+
+            showMovieResponse.setRoom(entity.getRoomEntity().getName());
+            showMovieResponse.setCinema(entity.getRoomEntity().getCinema().getName());
 
             DateHelperUtils dateHelperUtils = new DateHelperUtils();
             showMovieResponse.setDate(dateHelperUtils.formatDateToString(entity.getDate()));
 
             showMovieResponse.setStartTime(entity.getStartTime().toString());
-
             showMovieResponse.setState(entity.getStateShow());
 
             showMovieResponseList.add(showMovieResponse);
