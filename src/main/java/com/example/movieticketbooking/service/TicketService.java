@@ -1,7 +1,8 @@
 package com.example.movieticketbooking.service;
 
-import com.example.movieticketbooking.entity.RoleEntity;
-import com.example.movieticketbooking.entity.TicketEntity;
+import com.example.movieticketbooking.entity.*;
+import com.example.movieticketbooking.entity.ids.Ticketids;
+import com.example.movieticketbooking.payload.request.TicketRequest;
 import com.example.movieticketbooking.payload.response.RoleResponse;
 import com.example.movieticketbooking.payload.response.TicketResponse;
 import com.example.movieticketbooking.repository.TicketRepository;
@@ -46,5 +47,45 @@ public class TicketService implements ITicketService {
         }
 
         return ticketResponseList;
+    }
+
+    @Override
+    public boolean addTicket(TicketRequest ticketRequest) {
+        try{
+            TicketEntity ticketEntity = new TicketEntity();
+
+            Ticketids ticketids = new Ticketids();
+            ticketids.setSeatId(ticketRequest.getSeatId());
+            ticketids.setShowMovieId(ticketids.getShowMovieId());
+            ticketEntity.setIds(ticketids);
+
+            ShowMovieEntity showMovieEntity = new ShowMovieEntity();
+            showMovieEntity.setId(ticketRequest.getShowMovieId());
+            ticketEntity.setShowMovie(showMovieEntity);
+
+            SeatEntity seatEntity = new SeatEntity();
+            seatEntity.setId(ticketRequest.getSeatId());
+            ticketEntity.setSeat(seatEntity);
+
+            ticketEntity.setGuestName(ticketRequest.getGuestName());
+
+            TypeTicketEntity typeTicketEntity = new TypeTicketEntity();
+            typeTicketEntity.setId(ticketRequest.getTypeTicketId());
+            ticketEntity.setTypeTicket(typeTicketEntity);
+
+            BillEntity billEntity = new BillEntity();
+            billEntity.setId(ticketRequest.getBillId());
+            ticketEntity.setBill(billEntity);
+
+            StateTicketEntity stateTicketEntity = new StateTicketEntity();
+            stateTicketEntity.setId(ticketRequest.getStateTicketId());
+            ticketEntity.setStateTicket(stateTicketEntity);
+
+            ticketRepository.save(ticketEntity);
+            return true;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }

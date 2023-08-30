@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.Set;
 
 @Entity(name = "show_movie")
 @Getter @Setter
@@ -31,5 +32,8 @@ public class ShowMovieEntity {
     @ManyToOne
     @JoinColumn(name = "room_id")
     private RoomEntity roomEntity;
+
+    @OneToMany(mappedBy = "showMovie")
+    private Set<TicketEntity> ticketEntities;
 
 }

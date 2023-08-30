@@ -14,10 +14,12 @@ public class TicketEntity {
     Ticketids ids;
 
     @ManyToOne
+    @MapsId("showMovieId")
     @JoinColumn(name = "show_movie_id", insertable = false,updatable = false)
     private ShowMovieEntity showMovie;
 
     @ManyToOne
+    @MapsId("seatId")
     @JoinColumn(name = "seat_id", insertable = false,updatable = false)
     private SeatEntity seat;
 
