@@ -1,6 +1,8 @@
 package com.example.movieticketbooking.service;
 
 import com.example.movieticketbooking.entity.BillEntity;
+import com.example.movieticketbooking.entity.UserEntity;
+import com.example.movieticketbooking.payload.request.BillRequest;
 import com.example.movieticketbooking.payload.response.BillResponse;
 import com.example.movieticketbooking.repository.BillRepository;
 import com.example.movieticketbooking.service.imp.IBillService;
@@ -31,5 +33,27 @@ public class BillService implements IBillService {
         }
 
         return billResponseList;
+    }
+
+    @Override
+    public boolean addBill(BillRequest billRequest) {
+        try{
+            BillEntity billEntity = new BillEntity();
+
+            billEntity.setPrice(billRequest.getPrice());
+            billEntity.setQrCode(billRequest.getQrCode());
+            billEntity.setStateBill(billRequest.getStateBill());
+
+            UserEntity userEntity = new UserEntity();
+            userEntity.setId(billRequest.getUserId());
+            billEntity.setUser(userEntity);
+
+            billRepository.save(billEntity);
+            return true;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+
     }
 }
