@@ -2,7 +2,6 @@ package com.example.movieticketbooking.service;
 
 import com.example.movieticketbooking.entity.MovieEntity;
 import com.example.movieticketbooking.payload.response.MovieResponse;
-import com.example.movieticketbooking.payload.response.RoleResponse;
 import com.example.movieticketbooking.repository.MovieRepository;
 import com.example.movieticketbooking.service.imp.IMovieService;
 import com.example.movieticketbooking.utils.DateHelperUtils;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService implements IMovieService {
@@ -31,8 +31,8 @@ public class MovieService implements IMovieService {
 
             movieResponse.setId(entity.getId());
             movieResponse.setName(entity.getName());
-            movieResponse.setImageThumbnail(hostname + "/download/movie/" + entity.getImageThumbnail());
-            movieResponse.setImagePoster(hostname + "/download/movie/" + entity.getImagePoster());
+            movieResponse.setImageThumbnail(hostname + "/file/download/movie/" + entity.getImageThumbnail());
+            movieResponse.setImagePoster(hostname + "/file/download/movie/" + entity.getImagePoster());
             movieResponse.setDescription(entity.getDescription());
             movieResponse.setDuration(entity.getDuration());
             movieResponse.setCategory(entity.getCategory().getName());
@@ -48,5 +48,29 @@ public class MovieService implements IMovieService {
             movieResponseList.add(movieResponse);
         }
         return movieResponseList;
+    }
+
+    @Override
+    public MovieResponse getMovieById(int movieId) {
+        MovieResponse movieResponse = new MovieResponse();
+        Optional<MovieEntity> movie = movieRepository.findById(movieId);
+        if(movie.isPresent()){
+            movieResponse.setId(movie.get().getId());
+            movieResponse.setName(movie.get().getName());
+            movieResponse.setImageThumbnail(hostname + "/file/download/movie/" + movie.get().getImageThumbnail());
+            movieResponse.setImagePoster(hostname + "/file/download/movie/" + movie.get().getImagePoster());
+            movieResponse.setDescription(movie.get().getDescription());
+            movieResponse.setDuration(movie.get().getDuration());
+            movieResponse.setCategory(movie.get().getCategory().getName());
+            movieResponse.setDirector(movie.get().getDirector());
+            movieResponse.setActor(movie.get().getActor());
+            movieResponse.setTrailer(movie.get().getTrailer());
+            movieResponse.setTechnology(movie.get().getTechnology().getName());
+            movieResponse.setClassification(movie.get().getClassification().getName());
+
+            DateHelperUtils dateHelperUtils = new DateHelperUtils();
+            movieResponse.setReleaseDate(dateHelperUtils.formatDateToString(movie.get().getReleaseDate()));
+        }
+        return movieResponse;
     }
 }

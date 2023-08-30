@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IMovieService {
     List<MovieResponse> getAllMovie();
+
+    MovieResponse getMovieById(int movieId);
 }
