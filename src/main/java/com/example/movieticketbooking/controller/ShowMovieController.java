@@ -31,6 +31,13 @@ public class ShowMovieController {
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/findbymovie")
+    public ResponseEntity<?> getShowMovieByMovie(@RequestParam int movieId, @RequestParam String date, @RequestParam String stateShow) throws ParseException {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(iShowMovieService.getShowMovieByMovieAndDateAndStateShow(movieId, date, stateShow));
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> addShowMovie(@Valid @RequestBody ShowMovieRequest showMovieRequest){
         BaseResponse baseResponse = new BaseResponse();

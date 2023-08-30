@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface ShowMovieRepository extends JpaRepository<ShowMovieEntity, Integer> {
     List<ShowMovieEntity> findByRoomEntityAndDateAndStateShow(RoomEntity roomEntity, Date date, String stateShow);
+
+    List<ShowMovieEntity> findByMovieIdAndDateAndStateShow(int movieId, Date date, String stateShow);
 }

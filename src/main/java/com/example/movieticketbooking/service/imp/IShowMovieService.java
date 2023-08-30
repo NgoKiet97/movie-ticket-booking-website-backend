@@ -13,4 +13,6 @@ public interface IShowMovieService {
     boolean addShowMovie(ShowMovieRequest showMovieRequest);
 
     List<ShowMovieResponse> getShowMovieByCinemaAndDateAndStateShow(int cinemaId, String date, String stateShow) throws ParseException;
+
+    List<ShowMovieResponse> getShowMovieByMovieAndDateAndStateShow(int movieId, String date, String stateShow) throws ParseException;
 }

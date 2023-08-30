@@ -104,4 +104,28 @@ public class ShowMovieService implements IShowMovieService {
 
         return showMovieResponseList;
     }
+
+    @Override
+    public List<ShowMovieResponse> getShowMovieByMovieAndDateAndStateShow(int movieId, String date, String stateShow) throws ParseException {
+        List<ShowMovieResponse> showMovieResponseList = new ArrayList<ShowMovieResponse>();
+        DateHelperUtils dateHelperUtils = new DateHelperUtils();
+        List<ShowMovieEntity> showMovieEntityList = showMovieRepository.findByMovieIdAndDateAndStateShow(movieId, dateHelperUtils.formatStringToDate(date), stateShow);
+        for(ShowMovieEntity entity : showMovieEntityList){
+            ShowMovieResponse showMovieResponse = new ShowMovieResponse();
+            showMovieResponse.setId(entity.getId());
+            showMovieResponse.setMovie(entity.getMovie().getName());
+
+            showMovieResponse.setRoom(entity.getRoomEntity().getName());
+            showMovieResponse.setCinema(entity.getRoomEntity().getCinema().getName());
+
+            showMovieResponse.setDate(dateHelperUtils.formatDateToString(entity.getDate()));
+
+            showMovieResponse.setStartTime(entity.getStartTime().toString());
+            showMovieResponse.setState(entity.getStateShow());
+
+            showMovieResponseList.add(showMovieResponse);
+        }
+
+        return showMovieResponseList;
+    }
 }
