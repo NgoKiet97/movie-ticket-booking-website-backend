@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/show-movie")
@@ -20,6 +21,13 @@ public class ShowMovieController {
     public ResponseEntity<?> getAllShowMovie(){
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setData(iShowMovieService.getAllShowMovie());
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/findbycinema")
+    public ResponseEntity<?> getShowMovieByCinema(@RequestParam int cinemaId, @RequestParam String date, @RequestParam String stateShow) throws ParseException {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(iShowMovieService.getShowMovieByCinemaAndDateAndStateShow(cinemaId, date, stateShow));
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 

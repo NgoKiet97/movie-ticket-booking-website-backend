@@ -1,27 +1,30 @@
 package com.example.movieticketbooking.service;
 
-import com.example.movieticketbooking.entity.MovieEntity;
-import com.example.movieticketbooking.entity.RoleEntity;
-import com.example.movieticketbooking.entity.RoomEntity;
-import com.example.movieticketbooking.entity.ShowMovieEntity;
+import com.example.movieticketbooking.entity.*;
 import com.example.movieticketbooking.payload.request.ShowMovieRequest;
-import com.example.movieticketbooking.payload.response.RoleResponse;
 import com.example.movieticketbooking.payload.response.ShowMovieResponse;
+import com.example.movieticketbooking.repository.RoomRepository;
 import com.example.movieticketbooking.repository.ShowMovieRepository;
 import com.example.movieticketbooking.service.imp.IShowMovieService;
 import com.example.movieticketbooking.utils.DateHelperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.text.ParseException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ShowMovieService implements IShowMovieService {
     @Autowired
     ShowMovieRepository showMovieRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
+
 
     @Override
     public List<ShowMovieResponse> getAllShowMovie() {
@@ -72,5 +75,33 @@ public class ShowMovieService implements IShowMovieService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public List<ShowMovieResponse> getShowMovieByCinemaAndDateAndStateShow(int cinemaId, String date, String stateShow) throws ParseException {
+        List<ShowMovieResponse> showMovieResponseList = new ArrayList<ShowMovieResponse>();
+        List<RoomEntity> roomEntityList = roomRepository.findByCinemaId(cinemaId);
+        DateHelperUtils dateHelperUtils = new DateHelperUtils();
+
+        for(RoomEntity roomEntity : roomEntityList) {
+            List<ShowMovieEntity> showMovieEntityList = showMovieRepository.findByRoomEntityAndDateAndStateShow(roomEntity, dateHelperUtils.formatStringToDate(date), stateShow);
+            for(ShowMovieEntity entity : showMovieEntityList){
+                ShowMovieResponse showMovieResponse = new ShowMovieResponse();
+                showMovieResponse.setId(entity.getId());
+                showMovieResponse.setMovie(entity.getMovie().getName());
+
+                showMovieResponse.setRoom(entity.getRoomEntity().getName());
+                showMovieResponse.setCinema(entity.getRoomEntity().getCinema().getName());
+
+                showMovieResponse.setDate(dateHelperUtils.formatDateToString(entity.getDate()));
+
+                showMovieResponse.setStartTime(entity.getStartTime().toString());
+                showMovieResponse.setState(entity.getStateShow());
+
+                showMovieResponseList.add(showMovieResponse);
+            }
+        }
+
+        return showMovieResponseList;
     }
 }
