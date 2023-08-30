@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "seat")
 @Getter @Setter
@@ -19,4 +20,7 @@ public class SeatEntity {
     @ManyToOne
     @JoinColumn(name = "room_id")
     private RoomEntity room;
+
+    @OneToMany(mappedBy = "seat")
+    private Set<TicketEntity> ticketEntities;
 }
