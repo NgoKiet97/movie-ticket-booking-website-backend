@@ -88,4 +88,34 @@ public class TicketService implements ITicketService {
             return false;
         }
     }
+
+    @Override
+    public List<TicketResponse> getTicketByShowMovieAndStateTicket(int showMovieId, int stateTicketId) {
+        List<TicketResponse> ticketResponseList = new ArrayList<TicketResponse>();
+        List<TicketEntity> ticketEntityList = ticketRepository.findByShowMovieIdAndStateTicketId(showMovieId, stateTicketId);
+
+        for(TicketEntity entity : ticketEntityList){
+            TicketResponse ticketResponse = new TicketResponse();
+            ticketResponse.setShowMovieId(entity.getShowMovie().getId());
+            ticketResponse.setMovie(entity.getShowMovie().getMovie().getName());
+            ticketResponse.setCinema(entity.getShowMovie().getRoomEntity().getCinema().getName());
+            ticketResponse.setRoom(entity.getShowMovie().getRoomEntity().getName());
+
+            DateHelperUtils dateHelperUtils = new DateHelperUtils();
+            ticketResponse.setDate(dateHelperUtils.formatDateToString(entity.getShowMovie().getDate()));
+
+            ticketResponse.setStartTime(entity.getShowMovie().getStartTime().toString());
+
+            ticketResponse.setSeat(entity.getSeat().getName());
+            ticketResponse.setGuestName(entity.getGuestName());
+            ticketResponse.setTypeTicket(entity.getTypeTicket().getName());
+            ticketResponse.setBillId(entity.getBill().getId());
+            ticketResponse.setUser(entity.getBill().getUser().getName());
+            ticketResponse.setStateTicket(entity.getStateTicket().getName());
+
+            ticketResponseList.add(ticketResponse);
+        }
+
+        return ticketResponseList;
+    }
 }

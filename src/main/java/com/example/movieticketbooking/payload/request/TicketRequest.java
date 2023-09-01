@@ -12,6 +12,7 @@ public class TicketRequest {
 
     @NotNull
     private int seatId;
+
     private String guestName;
 
     @NotNull

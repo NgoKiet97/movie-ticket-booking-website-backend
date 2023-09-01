@@ -24,6 +24,16 @@ public class TicketController {
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/find-by-show-and-state")
+    public ResponseEntity<?> getTicketByShowMovieAndStateTicket(
+            @RequestParam int showMovieId,
+            @RequestParam int stateTicketId
+    ){
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(iTicketService.getTicketByShowMovieAndStateTicket(showMovieId, stateTicketId));
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
     @PostMapping("add")
     public ResponseEntity<?> addShowMovie(@Valid @RequestBody TicketRequest ticketRequest){
         BaseResponse baseResponse = new BaseResponse();
@@ -31,5 +41,7 @@ public class TicketController {
                 "Thêm thành công": "Thêm thất bại");
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
+
+
 
 }

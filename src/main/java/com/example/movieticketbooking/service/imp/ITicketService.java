@@ -9,4 +9,6 @@ public interface ITicketService {
     List<TicketResponse> getAllTicket();
 
     boolean addTicket(TicketRequest ticketRequest);
+
+    List<TicketResponse> getTicketByShowMovieAndStateTicket(int showMovieId, int stateTicketId);
 }
