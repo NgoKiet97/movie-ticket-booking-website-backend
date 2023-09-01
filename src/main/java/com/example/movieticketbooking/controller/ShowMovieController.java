@@ -13,6 +13,7 @@ import java.text.ParseException;
 
 @RestController
 @RequestMapping("/show-movie")
+@CrossOrigin
 public class ShowMovieController {
     @Autowired
     IShowMovieService iShowMovieService;

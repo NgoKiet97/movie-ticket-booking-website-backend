@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ICinemaService {
     List<CinemaResponse> getAllCinema();
+
+    CinemaResponse getCinemaById(int cinemaId);
 }

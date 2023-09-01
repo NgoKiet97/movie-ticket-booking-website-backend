@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/ticket")
+@CrossOrigin
 public class TicketController {
     @Autowired
     ITicketService iTicketService;

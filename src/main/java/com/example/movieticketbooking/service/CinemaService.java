@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CinemaService implements ICinemaService {
@@ -33,5 +34,18 @@ public class CinemaService implements ICinemaService {
             cinemaResponseList.add(cinemaResponse);
         }
         return cinemaResponseList;
+    }
+
+    @Override
+    public CinemaResponse getCinemaById(int cinemaId) {
+        CinemaResponse cinemaResponse = new CinemaResponse();
+        Optional<CinemaEntity> cinema = cinemaRepository.findById(cinemaId);
+        if(cinema.isPresent()){
+            cinemaResponse.setId(cinema.get().getId());
+            cinemaResponse.setName(cinema.get().getName());
+            cinemaResponse.setAddress(cinema.get().getAddress());
+        }
+
+        return cinemaResponse;
     }
 }

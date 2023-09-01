@@ -12,4 +12,5 @@ public class ShowMovieResponse {
     private String date;
     private String startTime;
     private String state;
+    private String movieImg;
 }

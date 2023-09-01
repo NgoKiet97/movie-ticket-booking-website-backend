@@ -8,6 +8,7 @@ import com.example.movieticketbooking.repository.ShowMovieRepository;
 import com.example.movieticketbooking.service.imp.IShowMovieService;
 import com.example.movieticketbooking.utils.DateHelperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -24,6 +25,9 @@ public class ShowMovieService implements IShowMovieService {
 
     @Autowired
     RoomRepository roomRepository;
+
+    @Value("${host.name}")
+    String hostname;
 
 
     @Override
@@ -89,6 +93,7 @@ public class ShowMovieService implements IShowMovieService {
                 ShowMovieResponse showMovieResponse = new ShowMovieResponse();
                 showMovieResponse.setId(entity.getId());
                 showMovieResponse.setMovie(entity.getMovie().getName());
+                showMovieResponse.setMovieImg(hostname + "/file/download/movie/" + entity.getMovie().getImageThumbnail());
 
                 showMovieResponse.setRoom(entity.getRoomEntity().getName());
                 showMovieResponse.setCinema(entity.getRoomEntity().getCinema().getName());
