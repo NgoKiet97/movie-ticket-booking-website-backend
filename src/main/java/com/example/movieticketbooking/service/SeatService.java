@@ -33,4 +33,16 @@ public class SeatService implements ISeatService {
 
         return seatResponseList;
     }
+
+    @Override
+    public SeatResponse getByNameAndRoomId(String name, int roomId) {
+        SeatResponse seatResponse = new SeatResponse();
+        SeatEntity entity = seatRepository.findByNameAndRoomId(name, roomId);
+
+        seatResponse.setId(entity.getId());
+        seatResponse.setName(entity.getName());
+        seatResponse.setRoom(entity.getRoom().getName());
+
+        return seatResponse;
+    }
 }

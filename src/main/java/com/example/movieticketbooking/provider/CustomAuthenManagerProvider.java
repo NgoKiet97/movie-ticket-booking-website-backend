@@ -25,12 +25,12 @@ public class CustomAuthenManagerProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String username = authentication.getName();
+        String email = authentication.getName();
         String password = authentication.getCredentials().toString();
-        UserEntity user = userRepository.findByName(username);
+        UserEntity user = userRepository.findByEmail(email);
         if(user != null){
             if(passwordEncoder.matches(password, user.getPassword())){
-                return new UsernamePasswordAuthenticationToken(username, user.getPassword(), new ArrayList<>());
+                return new UsernamePasswordAuthenticationToken(email, user.getPassword(), new ArrayList<>());
             }
         }
         return null;

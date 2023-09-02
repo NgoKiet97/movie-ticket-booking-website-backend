@@ -7,6 +7,5 @@ import lombok.Setter;
 public class BillRequest {
     private int userId;
     private double price;
-    private String qrCode;
     private String stateBill;
 }

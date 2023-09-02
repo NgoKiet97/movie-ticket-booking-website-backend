@@ -12,14 +12,34 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/bill")
+@CrossOrigin
 public class BillController {
     @Autowired
     IBillService iBillService;
 
     @GetMapping("")
-    public ResponseEntity<?> getAllRole(){
+    public ResponseEntity<?> getAllBill(){
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setData(iBillService.getAllBill());
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/find-by-user-and-state")
+    public ResponseEntity<?> getBillByUserAndState(
+            @RequestParam int userId,
+            @RequestParam String state
+    ){
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(iBillService.getBillByUserAndState(userId, state));
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/find-by-user")
+    public ResponseEntity<?> getBillByUser(
+            @RequestParam int userId
+    ){
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(iBillService.getBillByUser(userId));
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 

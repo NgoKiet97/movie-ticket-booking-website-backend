@@ -9,6 +9,7 @@ public class ShowMovieResponse {
     private String movie;
     private String cinema;
     private String room;
+    private int roomId;
     private String date;
     private String startTime;
     private String state;

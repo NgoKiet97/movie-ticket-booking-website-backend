@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -132,5 +131,27 @@ public class ShowMovieService implements IShowMovieService {
         }
 
         return showMovieResponseList;
+    }
+
+    @Override
+    public ShowMovieResponse getShowMovieById(int showMovieId) {
+        ShowMovieResponse showMovieResponse = new ShowMovieResponse();
+        Optional<ShowMovieEntity> showMovie = showMovieRepository.findById(showMovieId);
+        if (showMovie.isPresent()){
+            showMovieResponse.setId(showMovie.get().getId());
+            showMovieResponse.setMovie(showMovie.get().getMovie().getName());
+            showMovieResponse.setCinema(showMovie.get().getRoomEntity().getCinema().getName());
+            showMovieResponse.setRoom(showMovie.get().getRoomEntity().getName());
+            showMovieResponse.setRoomId(showMovie.get().getRoomEntity().getId());
+
+            DateHelperUtils dateHelperUtils = new DateHelperUtils();
+            showMovieResponse.setDate(dateHelperUtils.formatDateToString(showMovie.get().getDate()));
+
+            showMovieResponse.setStartTime(showMovie.get().getStartTime().toString());
+
+            showMovieResponse.setState(showMovie.get().getStateShow());
+            showMovieResponse.setMovieImg(hostname + "/file/download/movie/" + showMovie.get().getMovie().getImageThumbnail());
+        }
+        return showMovieResponse;
     }
 }

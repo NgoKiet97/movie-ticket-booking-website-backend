@@ -41,7 +41,6 @@ public class BillService implements IBillService {
             BillEntity billEntity = new BillEntity();
 
             billEntity.setPrice(billRequest.getPrice());
-            billEntity.setQrCode(billRequest.getQrCode());
             billEntity.setStateBill(billRequest.getStateBill());
 
             UserEntity userEntity = new UserEntity();
@@ -55,5 +54,31 @@ public class BillService implements IBillService {
             return false;
         }
 
+    }
+
+    @Override
+    public BillResponse getBillByUserAndState(int userId, String state) {
+        BillResponse billResponse = new BillResponse();
+        BillEntity bill = billRepository.findByUserIdAndStateBill(userId, state);
+
+        billResponse.setId(bill.getId());
+        billResponse.setUser(bill.getUser().getName());
+        billResponse.setPrice(bill.getPrice());
+        billResponse.setStateBill(bill.getStateBill());
+
+        return billResponse;
+    }
+
+    @Override
+    public BillResponse getBillByUser(int userId) {
+        BillResponse billResponse = new BillResponse();
+        BillEntity bill = billRepository.findByUserId(userId);
+
+        billResponse.setId(bill.getId());
+        billResponse.setUser(bill.getUser().getName());
+        billResponse.setPrice(bill.getPrice());
+        billResponse.setStateBill(bill.getStateBill());
+
+        return billResponse;
     }
 }

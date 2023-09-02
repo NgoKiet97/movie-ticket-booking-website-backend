@@ -36,10 +36,10 @@ public class TicketController {
     }
 
     @PostMapping("add")
-    public ResponseEntity<?> addShowMovie(@Valid @RequestBody TicketRequest ticketRequest){
+    public ResponseEntity<?> addTicket(@Valid @RequestBody TicketRequest ticketRequest){
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setMessage(iTicketService.addTicket(ticketRequest) ?
-                "Thêm thành công": "Thêm thất bại");
+                "Đặt vé thành công": "Đặt vé thất bại");
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 

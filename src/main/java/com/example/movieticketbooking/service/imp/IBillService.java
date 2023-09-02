@@ -10,4 +10,8 @@ public interface IBillService {
     List<BillResponse> getAllBill();
 
     boolean addBill(BillRequest billRequest);
+
+    BillResponse getBillByUserAndState(int userId, String state);
+
+    BillResponse getBillByUser(int userId);
 }

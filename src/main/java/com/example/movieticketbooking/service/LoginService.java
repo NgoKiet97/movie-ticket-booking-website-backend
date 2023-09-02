@@ -16,8 +16,8 @@ public class LoginService {
     @Autowired
     private UserRepository userRepository;
 
-    public boolean checkLogin(String username, String password){
-        List<UserEntity> list = userRepository.findByNameAndPassword(username,password);
+    public boolean checkLogin(String email, String password){
+        List<UserEntity> list = userRepository.findByEmailAndPassword(email,password);
         return list.size() > 0;
     }
 

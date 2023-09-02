@@ -109,8 +109,8 @@ public class TicketService implements ITicketService {
             ticketResponse.setSeat(entity.getSeat().getName());
             ticketResponse.setGuestName(entity.getGuestName());
             ticketResponse.setTypeTicket(entity.getTypeTicket().getName());
-            ticketResponse.setBillId(entity.getBill().getId());
-            ticketResponse.setUser(entity.getBill().getUser().getName());
+//            ticketResponse.setBillId(entity.getBill().getId());
+//            ticketResponse.setUser(entity.getBill().getUser().getName());
             ticketResponse.setStateTicket(entity.getStateTicket().getName());
 
             ticketResponseList.add(ticketResponse);

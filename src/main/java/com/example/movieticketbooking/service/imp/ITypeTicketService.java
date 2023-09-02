@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ITypeTicketService {
     List<TypeTicketResponse> getAllTypeTicket();
+
+    TypeTicketResponse getTypeTicketById(int typeId);
 }

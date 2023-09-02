@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IUserService {
     List<UserResponse> getAllUser();
+
+    UserResponse getUserByEmail(String email);
 }

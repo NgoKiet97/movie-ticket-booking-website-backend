@@ -30,7 +30,7 @@ public class TicketEntity {
     @JoinColumn(name = "type_ticket_id")
     private TypeTicketEntity typeTicket;
 
-    @ManyToOne
+    @ManyToOne(    cascade=CascadeType.ALL)
     @JoinColumn(name = "bill_id")
     private BillEntity bill;
 

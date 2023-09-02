@@ -1,8 +1,6 @@
 package com.example.movieticketbooking.service;
 
-import com.example.movieticketbooking.entity.RoleEntity;
 import com.example.movieticketbooking.entity.TypeTicketEntity;
-import com.example.movieticketbooking.payload.response.RoleResponse;
 import com.example.movieticketbooking.payload.response.TypeTicketResponse;
 import com.example.movieticketbooking.repository.TypeTicketRepository;
 import com.example.movieticketbooking.service.imp.ITypeTicketService;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TypeTicketService implements ITypeTicketService {
@@ -31,5 +30,17 @@ public class TypeTicketService implements ITypeTicketService {
             typeTicketResponseList.add(typeTicketResponse);
         }
         return typeTicketResponseList;
+    }
+
+    @Override
+    public TypeTicketResponse getTypeTicketById(int typeId) {
+        TypeTicketResponse typeTicketResponse = new TypeTicketResponse();
+        Optional<TypeTicketEntity> typeTicket = typeTicketRepository.findById(typeId);
+        if (typeTicket.isPresent()){
+            typeTicketResponse.setId(typeTicket.get().getId());
+            typeTicketResponse.setName(typeTicket.get().getName());
+            typeTicketResponse.setPrice(typeTicket.get().getTicketPrice());
+        }
+        return typeTicketResponse;
     }
 }

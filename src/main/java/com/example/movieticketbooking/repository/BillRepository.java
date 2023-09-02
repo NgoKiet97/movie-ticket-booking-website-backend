@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BillRepository extends JpaRepository<BillEntity, Integer> {
+    BillEntity findByUserIdAndStateBill(int userId, String state);
+
+    BillEntity findByUserId(int userId);
 }
